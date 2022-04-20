@@ -12,7 +12,7 @@ st.text('Provide URL of Mammography image')
 
 @st.cache(allow_output_mutation=True)
 def load_model():
-  model = tf.keras.models.load_model('/content/newTransofmer/models')
+  model = tf.keras.models.load_model('./models')
   return model
 
 with st.spinner('Loading Model Into Memory....'):

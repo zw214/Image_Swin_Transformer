@@ -42,7 +42,7 @@ $ make gcloud-deploy
 
 Here's a demo of how the app works/looks like.
 
-
+https://user-images.githubusercontent.com/72582001/165136001-ba043d53-97a7-4681-804f-1df98d2a3c9f.mov
 
 ## Data Sourcing & Processing
 
@@ -106,3 +106,4 @@ to make an evaluation for the Swin Transformer model.
 @article{
 
 ```
+

@@ -40,6 +40,10 @@ I was also able to make this as a GCP-hosted cloud web app. To run the app, you 
 $ make gcloud-deploy
 ```
 
+Here's a demo of how the app works/looks like.
+
+
+
 ## Data Sourcing & Processing
 
 Pipeline comes from the Mammography dataset, and I store it into a tfrecords. From tfrecords, I do pre-processing steps and resizing to fit into the model. I also need to make images stacked into their 3 color channel. To extract images and labels from tfrecords, I need to decode image into int8, 

@@ -3,7 +3,7 @@ from scripts.make_dataset import create_image_and_labels, create_train_and_test_
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
 
-images, labels = create_image_and_labels(['/data/processed/training10_0/training10_0.tfrecords'])
+images, labels = create_image_and_labels(['./data/processed/training10_0/training10_0.tfrecords'])
 x_train, x_test, y_train, y_test = create_train_and_test_data(images, labels)
 
 x_train_reshaped = x_train.reshape((x_train.shape[0], -1))

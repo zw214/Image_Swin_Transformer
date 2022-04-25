@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# gcloud file
+aipi-540-a94e6cb16e42.json

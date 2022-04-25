@@ -40,20 +40,38 @@ $ make gcloud-deploy
 
 ## Data Sourcing & Processing
 
+Pipeline comes from the Mammography dataset, and I store it into a tfrecords. From tfrecords, I do pre-processing steps and resizing to fit into the model. I also need to make images stacked into their 3 color channel. To extract images and labels from tfrecords, I need to decode image into int8, 
+check every image is 598 by 598, and also need to check how many images are of each label.
 
 
-## Modeling Details
+## Non DL Modeling Details
+For the Random Forest Classifier, I trained on both binary classification (cancer vs. noncancer), as well as noncancer, benign and malignant. Both have promising results. Here are the parameters used in RF Classifier:
+N_estimators: 100
+Criterion: gini
+mini_samples_leaf : 2
+Max_features: auto
+
+## DL Modeling Details
+
+
 
 ## Model Evaluation
 
+For binary classification, it matches all SOTA results with a 0.87 accuracy. More training and fine tuning can push the score higher
+
+For multi label classification, Swin Transformer provides a new model to predict different and harder classes on same dataset, and also achieves a promising result with a 0.69 accuracy.
+
+
 **Pros:**
 
-* 
-
+* Swin Transformer provides a new perspective to classify multi label mammography images: new model, new classification labels, promising results
+* GCP can host Streamlit web app really well, providing a user friendly interface for as long as you wish
 
 **Cons:**
 
-* 
+* GCP AI logits calculation seems to have different result than what I got from Python/Colab, that might cause issues for individual experience
+* Performance looks good but needs more improvement
+* Datatype overflow for images in streamlit visualization, need to save 2 formats (0-1 and 0-255) of same image
 
 In ```model.py```, once you do a training, you can just do
 
@@ -62,9 +80,20 @@ $ model.evaluate()
 ```
 to make an evaluation for the Swin Transformer model.
 
+## Key User Interface Decisions
+
+* Visibility: My app lets you upload an image and closely look at its image details
+* Feedback: this web app is able to return a label and a confidence score for your uploaded image
+* Application is simplified: choose model, upload image, see result
+* Mapping: Clear relationships between the input (mammo image) and its result
+* Consistency: no interruptions are expected; as long as I don’t stop GCP service, you can see the result
+* Affordance: attributes of the web app communicate purpose
+
+
 ## Further improvements
 
-* 
+* Fine tune the DL model better to push the accuracy score higher
+* Make the UI page more interactive with more models to select, and more workflow options
 
 ## Citations
 ```

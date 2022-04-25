@@ -7,7 +7,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from scripts.make_dataset import create_image_and_labels, create_train_and_test_data
 
-images, labels = create_image_and_labels(['/data/processed/training10_0/training10_0.tfrecords'])
+images, labels = create_image_and_labels(['./data/processed/training10_0/training10_0.tfrecords'])
 x_train, x_test, y_train, y_test = create_train_and_test_data(images, labels)
 
 

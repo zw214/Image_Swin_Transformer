@@ -8,7 +8,7 @@ from PIL import Image
 from utils import load_and_prep_image, classes_and_models, predict_json
 
 # Setup environment credentials (you'll need to change these)
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "aipi-540-a94e6cb16e42.json" # change for your GCP key
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "x.json" # change for your GCP key
 PROJECT = "aipi-540" # change for your GCP project
 REGION = "us-central1" # change for your GCP region (where your model is hosted)
 

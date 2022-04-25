@@ -4,10 +4,11 @@ import requests
 import streamlit as st
 import tensorflow as tf
 import numpy as np
+from PIL import Image
 from utils import load_and_prep_image, classes_and_models, predict_json
 
 # Setup environment credentials (you'll need to change these)
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "aipi-540-4a9a95f14ee5.json" # change for your GCP key
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "aipi-540-a94e6cb16e42.json" # change for your GCP key
 PROJECT = "aipi-540" # change for your GCP project
 REGION = "us-central1" # change for your GCP region (where your model is hosted)
 
@@ -33,18 +34,18 @@ def make_prediction(image, model, class_names):
                          instances=image)
     pred_class = class_names[np.argmax(preds[0])]
     confidence = np.max(preds[0])
-    return image, pred_class, confidence
+    return image, pred_class, confidence, preds[0]
 
 # Pick the model version
 choose_model = st.sidebar.selectbox(
     "Pick model you'd like to use",
-    ("Model 1 (all mammo images)", # original all images
-     "Model 2 (11 food classes)", # original 10 classes + donuts
-     "Model 3 (11 food classes + non-food class)") # 11 classes (same as above) + not_food class
+    ("Model 1 (all mammo images with 3 labels)", # original all images
+     "Model 2 (model 2)", # original 10 classes + donuts
+     "Model 3 (model 3)") # 11 classes (same as above) + not_food class
 )
 
 # Model choice logic
-if choose_model == "Model 1 (all mammo images)":
+if choose_model == "Model 1 (all mammo images with 3 labels)":
     CLASSES = classes_and_models["model_1"]["classes"]
     MODEL = classes_and_models["model_1"]["model_name"]
 
@@ -54,15 +55,16 @@ if st.checkbox("Show classes"):
 
 # File uploader allows user to add their own image
 uploaded_file = st.file_uploader(label="Upload an image of mammo image",
-                                 type=["png", "jpeg", "jpg"])
+                                 type=["png", "jpeg", "jpg"],
+                                 accept_multiple_files=True)
 
 # Create logic for app flow
 if not uploaded_file:
     st.warning("Please upload an image.")
     st.stop()
 else:
-    uploaded_image = uploaded_file.read()
-    st.image(uploaded_image, use_column_width=True)
+    uploaded_image = uploaded_file[0].read()
+    st.image(uploaded_image, use_column_width=True, clamp=True)
     pred_button = st.button("Predict")
 
 # Did the user press the predict button?
@@ -71,6 +73,7 @@ if pred_button:
 
 # And if they did...
 if pred_button:
-    image, preds, conf = make_prediction(uploaded_image, model=MODEL, class_names=CLASSES)
+    image, preds, conf, logits = make_prediction(uploaded_file[1].read(), model=MODEL, class_names=CLASSES)
     st.write(f"Prediction: {preds}, \
-               Confidence: {conf:.3f}")
+               Confidence: {conf:.3f}, \
+               Logits: {logits}")

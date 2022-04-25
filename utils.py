@@ -4,13 +4,12 @@ import numpy as np
 import googleapiclient.discovery
 from google.api_core.client_options import ClientOptions
 
-base_classes = ['negative', 'benign calcification', 'benign mass', 
-         'malignant calcification', 'malignant mass']
+base_classes = ['negative', 'benign', 'malignant']
 
 classes_and_models = {
     "model_1": {
         "classes": base_classes,
-        "model_name": "swin_transformer_1" # change to be your model name
+        "model_name": "swin_transformer" # change to be your model name
     }
 }
 
@@ -60,12 +59,11 @@ def predict_json(project, region, model, instances, version=None):
     return response["predictions"]
 
 # Create a function to import an image and resize it to be able to be used with our model
-def load_and_prep_image(filename, img_shape=128, rescale=True):
+def load_and_prep_image(filename, img_shape=224, rescale=False):
   """
   Reads in an image from filename, turns it into a tensor and reshapes into
   (224, 224, 3).
   """
-
 
   img = tf.io.decode_image(filename, channels=3) # make sure there's 3 colour channels (for PNG's)
   img = tf.cast(img, tf.float32)
@@ -75,4 +73,4 @@ def load_and_prep_image(filename, img_shape=128, rescale=True):
       img = img/255.
   else:
       img = img
-  return np.expand_dims(img, axis=0).astype(np.int16)
+  return np.expand_dims(img, axis=0).astype(np.float32)

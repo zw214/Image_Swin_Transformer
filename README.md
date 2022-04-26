@@ -2,8 +2,6 @@
 
 ![image](https://www.itnonline.com/sites/default/files/styles/slider/public/brightcove/videos/images/posters/image_6286643812001.jpg?itok=0SwZFVDI)
 
-## Motivation
-
 ## Getting Started
 
 First, install the requirements necessary to run the python files.
@@ -43,6 +41,9 @@ $ make gcloud-deploy
 Here's a demo of how the app works/looks like.
 
 https://user-images.githubusercontent.com/72582001/165136001-ba043d53-97a7-4681-804f-1df98d2a3c9f.mov
+
+## End Product
+The end product is this [web app](https://aipi-540.uc.r.appspot.com/). You can click on this website to try it yourself by uploading my provided test images, or you can create same mammography image slices and see the results. 
 
 ## Data Sourcing & Processing
 

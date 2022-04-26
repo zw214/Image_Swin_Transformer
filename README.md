@@ -59,6 +59,10 @@ Max_features: auto
 
 ## DL Modeling Details
 
+In Swin Transformer, it adds shifted window approach to compute self-attention locally. The shifted windowing scheme brings greater efficiency by limiting self-attention computation to non-overlapping local windows while also allowing for cross-window connection. This hierarchical architecture has the flexibility to model at various scales and has linear computational complexity with respect to image size.
+
+During training, I first generate preprocessed image and labels from my dataset. I then assemble Swin Transformer model to: build a transformer encoder structure, wrap shifted window class, and create patch embeddings. I need to set up default parameters including: shifted window size, patch window size, embedding dimensions, MLP layer size, learning rate, batch size, and label smoothing. I start a training with 40 epochs, and save the best model with highest validation set accuracy. Later, I finetune hyperparameters, play with different params and see if there is a better result.
+
 
 
 ## Model Evaluation
@@ -103,7 +107,26 @@ to make an evaluation for the Swin Transformer model.
 
 ## Citations
 ```
-@article{
+@article{DBLP:journals/corr/abs-2103-14030,
+  author    = {Ze Liu and
+               Yutong Lin and
+               Yue Cao and
+               Han Hu and
+               Yixuan Wei and
+               Zheng Zhang and
+               Stephen Lin and
+               Baining Guo},
+  title     = {Swin Transformer: Hierarchical Vision Transformer using Shifted Windows},
+  journal   = {CoRR},
+  volume    = {abs/2103.14030},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2103.14030},
+  eprinttype = {arXiv},
+  eprint    = {2103.14030},
+  timestamp = {Thu, 08 Apr 2021 07:53:26 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2103-14030.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
 
 ```
 

@@ -32,7 +32,7 @@ $ streamlit run app.py
 
 As a side note, for safety issue (GCP does not allow me to upload security key to github), I hide out my API key at line #11. To run the model, you want to create a google storage bucket to save your AI model, use AI Platform to deploy this model, then create your own json key file. You can replace your json file name to my key entry.
 
-I was also able to make this as a GCP-hosted cloud web app. To run the app, you want to put the model on GCP, as well as created an AI platform to support the model. You also need to create a service account and put your key json file into this same folder. Once everything is done in your GCloud Platform, you also need to change your GCP account info in app.py. Here is a nice [tutorial](https://www.youtube.com/watch?v=fw6NMQrYc6w) for GCP AI model deployment. After all these steps, you can deploy the model on GCP with:
+I was also able to make this as a GCP-hosted cloud web app. To run the app, you want to put the model on GCP, as well as created an AI platform to support the model. Here is a nice [tutorial](https://www.youtube.com/watch?v=fw6NMQrYc6w) for GCP AI model deployment. After all these steps, you can deploy the model on GCP App Engine with:
 
 ```
 $ make gcloud-deploy

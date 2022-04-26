@@ -1,4 +1,4 @@
-# Image_Swin_Transformer
+# Image Classification with Swin Transformer
 
 ![image](https://www.itnonline.com/sites/default/files/styles/slider/public/brightcove/videos/images/posters/image_6286643812001.jpg?itok=0SwZFVDI)
 
